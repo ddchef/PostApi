@@ -17,7 +17,7 @@
   import { reactive, ref } from 'vue';
   import None from '../../custom-components/none.vue';
   import EditTable from '../../custom-components/edit-table.vue';
-import Codemirror from '../../custom-components/codemirror.vue';
+  import Codemirror from '../../custom-components/codemirror.vue';
   const columns = [{name:'参数名',value:'form_name'},{name:'参数值',value:'form_value'}]
   const form_data = reactive([])
 
