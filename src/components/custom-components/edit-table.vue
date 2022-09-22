@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import {NTable,NButton,NIcon,NSpace} from "naive-ui"
 import {RemoveCircleOutline} from "@vicons/ionicons5"
-import { reactive } from "vue";
+import { ref, watchEffect } from "vue";
 import InputGhost from "./input-ghost.vue";
 type Column = {
   name:string,
@@ -44,17 +44,30 @@ const props = withDefaults(defineProps<{
   columns:Column[],
   data:Data[]
 }>(),{columns:()=>[],data:()=>[]})
+const emit = defineEmits<{
+  (e:'update:data',data:Data[]):void
+}>()
 
-const self_data = reactive<Data[]>([...props.data,{}])
+const self_data = ref<Data[]>([])
+watchEffect(()=>{
+  self_data.value = [...props.data,{}]
+})
+
+const emitData=()=>{
+  if(Object.values(self_data.value[self_data.value.length-1]).every(v=>v===undefined)){
+    emit('update:data',self_data.value.slice(0,-1))
+    return
+  }
+  emit('update:data',self_data.value)
+}
 
 const handleRemoveRow = (index:number)=>{
-  self_data.splice(index,1)
+  self_data.value.splice(index,1)
+  emitData()
 }
 
 const handleBlur = ()=>{
-  if(self_data.every(item=>Object.values(item).some(v=>v!==undefined))){
-    self_data.push({})
-  }
+  emitData()
 }
 
 </script>
