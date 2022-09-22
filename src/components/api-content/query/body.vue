@@ -24,5 +24,5 @@
   type BodyType = 'none'|'form-data'|'json'
   const bodyType = ref<BodyType>('none')
 
-  const bodyJson = ref('')
+  const bodyJson = ref('{}')
 </script>

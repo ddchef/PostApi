@@ -1,8 +1,19 @@
 <template>
-  <div class="h-96 min-h-min" ref="editor"></div>
+  <div class="group h-96 border	border-inherit relative">
+    <div ref="editor" class="h-full"></div>
+    <div class="absolute z-10 top-0 right-0.5 opacity-0 group-hover:opacity-100">
+      <n-button tertiary circle type="info" @click="formatHook">
+        { }
+      </n-button>
+    </div>
+  </div>
+  <n-ellipsis expand-trigger="click" line-clamp="2" :tooltip="false" class="text-xs text-red-600">
+    <template v-for="(err,i) in error||[]">{{err.message}}<br></template>
+  </n-ellipsis>
 </template>
 <script setup lang="ts">
-  import { Ref, ref } from 'vue';
+  import { computed, Ref, ref } from 'vue';
+  import { NEllipsis,NButton } from 'naive-ui';
   import { useCodeMirror } from '../../hook/useCodeMirror';
 
   const emit = defineEmits<{
@@ -12,10 +23,12 @@
     code:string
   }>(),{code:''})
   const editor = ref<Element>()
-  const handleCodeChange=(code:string)=>{
-    emit('update:code',code)
-  }
-  useCodeMirror(props.code,editor as unknown as Ref<Element>,handleCodeChange)
+    
+  const code = computed({
+    get:()=>props.code,
+    set:(v)=>emit('update:code',v)
+  })
+  const {error,formatHook} = useCodeMirror(code,editor as unknown as Ref<Element>)
 </script>
 <style>
   .cm-editor { height: 100% }
