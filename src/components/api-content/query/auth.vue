@@ -19,41 +19,42 @@
 </template>
 <script setup lang="ts">
   import { NSelect,NInput } from 'naive-ui';
-  import { ref } from 'vue';
+  import { computed } from 'vue';
   import Row from '../../custom-components/row.vue';
-  type AuthType = 'No-Auth'|'API-Key'|'Bearer-Token'|'Basic-Auth'
-  const authOption = [{
-    value:'No-Auth',
-    label:'No Auth'
-  },{
-    value:'API-Key',
-    label:'API Key'
-  },{
-    value:'Bearer-Token',
-    label:'Bearer Token'
-  },{
-    value:'Basic-Auth',
-    label:'Basic Auth'
-  },]
-  const authType = ref<AuthType>('No-Auth')
-
+  import { useGetPostData } from '@/hook/temporaryPostData';
+  import { APIKeyOption,authOption } from '@/dictionary';
+  const postData = useGetPostData()
+  const authType = computed({
+    get:()=>postData.authType||'No-Auth',
+    set:(v)=>postData.authType = v
+  })
   // api-key
-  const APIKeyOption = [{
-    value:'Header',
-    label:'Header'
-  },{
-    value:'Query-Params',
-    label:'Query Params'
-  }]
-  type ApiKeyType = 'Header'|'Query-Params'
-  const apiKeyType = ref<ApiKeyType>('Header')
-  const apiKey = ref('')
-  const apiValue = ref('')
+  const apiKeyType = computed({
+    get:()=>postData.apiKeyType||'Header',
+    set:(v)=>postData.apiKeyType = v
+  })
+  const apiKey = computed({
+    get:()=>postData.apiKey,
+    set:(v)=>postData.apiKey = v
+  })
+  const apiValue = computed({
+    get:()=>postData.apiValue,
+    set:(v)=>postData.apiValue = v
+  })
 
   // Bearer-token
-  const bearerToken = ref('')
+  const bearerToken = computed({
+    get:()=>postData.bearerToken,
+    set:(v)=>postData.bearerToken = v
+  })
 
   //Basic-auth
-  const basicUsername = ref('')
-  const basicPassword = ref('')
+  const basicUsername = computed({
+    get:()=>postData.basicUsername,
+    set:(v)=>postData.basicUsername = v
+  })
+  const basicPassword = computed({
+    get:()=>postData.basicPassword,
+    set:(v)=>postData.basicPassword = v
+  })
 </script>

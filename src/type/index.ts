@@ -13,19 +13,20 @@ export type BodyDataType = {
 }
 
 export type PostDataType = {
+  name:string,
   method: MethodType,
   url:string,
   params:TableDataType,
-  body:BodyDataType,
+  bodyType:BodyType,
+  form_data:TableDataType,
+  bodyJson:string,
   cookie:TableDataType,
   header: TableDataType,
-  auth: {
-    authType:AuthType,
-    apiKeyType:ApiKeyType,
-    apiKey:string,
-    apiValue:string,
-    bearerToken:string,
-    basicUsername:string,
-    basicPassword:string
-  }
+  authType:AuthType,
+  apiKeyType:ApiKeyType,
+  apiKey:string,
+  apiValue:string,
+  bearerToken:string,
+  basicUsername:string,
+  basicPassword:string
 }

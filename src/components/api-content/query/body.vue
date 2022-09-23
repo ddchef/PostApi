@@ -14,38 +14,25 @@
 </template>
 <script setup lang="ts">
   import { NRadio,NRadioGroup } from 'naive-ui';
-  import { reactive, ref } from 'vue';
+  import { computed, reactive, ref } from 'vue';
   import None from '../../custom-components/none.vue';
   import EditTable from '../../custom-components/edit-table.vue';
   import Codemirror from '../../custom-components/codemirror.vue';
   import { columns } from '@/dictionary/index';
-  import { TableDataType } from '@/type';
-  const props = withDefaults(defineProps<{
-    data:{
-      bodyType:BodyType,
-      form_data:TableDataType,
-      bodyJson:string
-    }
-  }>(),{
-    data:()=>({
-      bodyType:'none',
-      form_data:[],
-      bodyJson:''
-    })
+  import { useGetPostData } from '@/hook/temporaryPostData';
+  const postData = useGetPostData()
+  const form_data = computed({
+    get:()=>postData.form_data,
+    set:(v)=>postData.form_data = v
   })
 
-  const emit = defineEmits<{
-    (e:'update:value',data:{
-      bodyType:BodyType,
-      form_data:TableDataType,
-      bodyJson:string
-    }):void
-  }>()
+  const bodyType = computed({
+    get:()=>postData.bodyType||'none',
+    set:(v)=>postData.bodyType = v
+  })
 
-  const form_data = reactive<TableDataType>([])
-
-  type BodyType = 'none'|'form-data'|'json'
-  const bodyType = ref<BodyType>('none')
-
-  const bodyJson = ref('{}')
+  const bodyJson = computed({
+    get:()=>postData.bodyJson,
+    set:(v)=>postData.bodyJson = v
+  })
 </script>

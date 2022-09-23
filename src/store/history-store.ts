@@ -10,5 +10,5 @@ export const useHistory = defineStore('history',()=>{
   const getPostData = (key:string):PostDataType|undefined=>{
     return historyPostData.value.get(key)
   }
-  return {setPostData,getPostData}
+  return {setPostData,getPostData,historyPostData}
 })

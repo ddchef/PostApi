@@ -41,4 +41,26 @@ export const methods = [
   },
 ]
 
-export const columns = [{name:'参数名',value:'name'},{name:'参数值',value:'value'}]
+export const columns = [{name:'参数名',value:'key'},{name:'参数值',value:'value'}]
+
+export const authOption = [{
+  value:'No-Auth',
+  label:'No Auth'
+},{
+  value:'API-Key',
+  label:'API Key'
+},{
+  value:'Bearer-Token',
+  label:'Bearer Token'
+},{
+  value:'Basic-Auth',
+  label:'Basic Auth'
+},]
+
+export const APIKeyOption = [{
+  value:'Header',
+  label:'Header'
+},{
+  value:'Query-Params',
+  label:'Query Params'
+}]

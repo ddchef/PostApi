@@ -4,13 +4,32 @@ import { v4 as uuidv4 } from 'uuid';
 import { ref } from "vue";
 
 export const useTemporary = defineStore('temporary',()=>{
-  const openedPostData = ref<Map<string,PostDataType|{}>>(new Map())
+  const temporaryPostData = ref<Map<string,PostDataType>>(new Map())
   const openNewPostData = ()=>{
     const key = uuidv4()
-    openedPostData.value.set(key,{})
+    temporaryPostData.value.set(key,{
+      name:'新建接口',
+      method: 'GET',
+      url:'',
+      params:[],
+      bodyType:'none',
+      form_data:[],
+      bodyJson:'',
+      cookie:[],
+      header: [],
+      authType:'No-Auth',
+      apiKeyType:'Header',
+      apiKey:'',
+      apiValue:'',
+      bearerToken:'',
+      basicUsername:'',
+      basicPassword:''
+    })
+    return key
   }
   const openHistoryPostData = (postData:PostDataType,key:string)=>{
-    openedPostData.value.set(key,postData)
+    temporaryPostData.value.set(key,postData)
   }
-  return {openNewPostData,openHistoryPostData}
+
+  return {openNewPostData,openHistoryPostData,temporaryPostData}
 })

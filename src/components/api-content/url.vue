@@ -11,25 +11,32 @@
     <n-gi :span="4">
       <n-space align="center" justify="center">
         <n-button strong secondary type="info" @click="handleRun">运行</n-button>
-        <n-button type="success">保存</n-button>
+        <n-button type="success" @click="handleSave">保存</n-button>
       </n-space>
     </n-gi>
   </n-grid>
 </template>
 <script setup lang="ts">
+  import { useTemporary } from "@/store/temporary-store";
   import {NInputGroup,NSelect,NInput,NGi,NGrid,NButton,NSpace} from "naive-ui"
-  import { ref } from "vue";
+  import { storeToRefs } from "pinia";
+  import { computed, inject, ref, watchEffect } from "vue";
   import {methods} from '../../dictionary/index'
-
-  const emit = defineEmits<{
-    (e:'run',method:string,url:string):void
-  }>()
-
-  const method = ref('GET')
-  const url = ref('')
-
+  import {PostDataType} from "@/type";
+  const storeKey = inject<string>('store_key')
+  const temporaryStore = useTemporary()
+  const {temporaryPostData} = storeToRefs(temporaryStore)
+  const postData = temporaryPostData.value.get(storeKey as string) as PostDataType
+  const method = computed({
+    get:()=>postData?.method||'GET',
+    set:(v)=>postData.method=v
+  })
+  const url = computed({
+    get:()=>postData?.url||'',
+    set:(v)=>postData.url=v
+  })
   const handleRun = ()=>{
-    emit('run',method.value,url.value)
+    console.log(postData)
   }
   const handleSave = ()=>{
 

@@ -5,15 +5,11 @@
 import { computed } from 'vue';
 import EditTable from '../../custom-components/edit-table.vue';
 import {columns} from '../../../dictionary/index';
-import { TableDataType } from '@/type';
-const props = withDefaults(defineProps<{
-  data:TableDataType
-}>(),{data:()=>[]})
-const emit = defineEmits<{
-  (e:'update:data',data:TableDataType):void
-}>()
+import { useGetPostData } from '@/hook/temporaryPostData';
+const postData = useGetPostData()
+
 const query_data = computed({
-  get:()=>props.data,
-  set:(v)=>emit('update:data',v)
+  get:()=>postData.params,
+  set:(v)=>postData.params = v
 })
 </script>
