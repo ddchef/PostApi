@@ -1,9 +1,19 @@
 <template>
-  <EditTable :columns="columns" :data="query_data"></EditTable>
+  <EditTable :columns="columns" v-model:data="query_data"></EditTable>
 </template>
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { computed } from 'vue';
 import EditTable from '../../custom-components/edit-table.vue';
-const columns = [{name:'参数名',value:'query_name'},{name:'参数值',value:'query_value'}]
-const query_data = reactive([])
+import {columns} from '../../../dictionary/index';
+import { TableDataType } from '@/type';
+const props = withDefaults(defineProps<{
+  data:TableDataType
+}>(),{data:()=>[]})
+const emit = defineEmits<{
+  (e:'update:data',data:TableDataType):void
+}>()
+const query_data = computed({
+  get:()=>props.data,
+  set:(v)=>emit('update:data',v)
+})
 </script>

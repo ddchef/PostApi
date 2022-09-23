@@ -4,7 +4,7 @@
       <ApiContent/>
     </n-tab-pane>
     <template #prefix>
-      <n-button quaternary type="primary">
+      <n-button quaternary type="primary" @click="handleNewTab">
         <n-icon size="20">
           <Add></Add>
         </n-icon>
@@ -16,4 +16,5 @@
   import { NTabs,NTabPane,NIcon,NButton } from 'naive-ui';
   import {Add} from "@vicons/ionicons5";
   import ApiContent from '../api-content/index.vue'
+  const handleNewTab = ()=>{}
 </script>

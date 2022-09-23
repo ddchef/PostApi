@@ -8,7 +8,7 @@
   </div>
   <div class="pt-5">
     <None v-if="bodyType === 'none'"></None>
-    <EditTable v-if="bodyType==='form-data'" :columns="columns" :data="form_data"></EditTable>
+    <EditTable v-if="bodyType==='form-data'" :columns="columns" v-model:data="form_data"></EditTable>
     <Codemirror v-if="bodyType === 'json'" v-model:code="bodyJson"></Codemirror>
   </div>
 </template>
@@ -18,8 +18,31 @@
   import None from '../../custom-components/none.vue';
   import EditTable from '../../custom-components/edit-table.vue';
   import Codemirror from '../../custom-components/codemirror.vue';
-  const columns = [{name:'参数名',value:'form_name'},{name:'参数值',value:'form_value'}]
-  const form_data = reactive([])
+  import { columns } from '@/dictionary/index';
+  import { TableDataType } from '@/type';
+  const props = withDefaults(defineProps<{
+    data:{
+      bodyType:BodyType,
+      form_data:TableDataType,
+      bodyJson:string
+    }
+  }>(),{
+    data:()=>({
+      bodyType:'none',
+      form_data:[],
+      bodyJson:''
+    })
+  })
+
+  const emit = defineEmits<{
+    (e:'update:value',data:{
+      bodyType:BodyType,
+      form_data:TableDataType,
+      bodyJson:string
+    }):void
+  }>()
+
+  const form_data = reactive<TableDataType>([])
 
   type BodyType = 'none'|'form-data'|'json'
   const bodyType = ref<BodyType>('none')
