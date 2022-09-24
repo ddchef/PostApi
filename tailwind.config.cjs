@@ -6,6 +6,9 @@ module.exports = {
       lineHeight: {
         'extra-loose': '2.5',
         '8.5': '34px',
+      },
+      maxWidth: {
+        '224': '224px',
       }
     },
   },

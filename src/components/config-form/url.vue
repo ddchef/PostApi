@@ -5,7 +5,7 @@
         <div class="w-32">
           <n-select v-model:value="method" :render-label="renderLabel" :options="methods"></n-select>
         </div>
-        <n-input v-model:value="url" clearable placeholder='接口路径，"/"开始'></n-input>
+        <n-input v-model:value="url" clearable placeholder='输入 http 或 https 起始的完整 URL'></n-input>
       </n-input-group>
     </n-gi>
     <n-gi :span="4">
@@ -25,12 +25,13 @@
   import {PostDataType} from "@/type";
   import { useHistory } from "@/store/history-store";
   import Method from "../custom-components/method.vue";
-import { postDataToConfig } from "@/lib/utils";
-import { request } from "@/lib/request";
+  import { postDataToConfig } from "@/lib/utils";
+  import { request } from "@/lib/request";
   const storeKey = inject<string>('store_key')
   const temporaryStore = useTemporary()
   const {temporaryPostData} = storeToRefs(temporaryStore)
   const postData = temporaryPostData.value.get(storeKey as string) as PostDataType
+  console.log(postData,'postData')
   const method = computed({
     get:()=>postData?.method||'GET',
     set:(v)=>postData.method=v
@@ -42,16 +43,21 @@ import { request } from "@/lib/request";
   const handleRun = ()=>{
     const config = postDataToConfig(postData)
     request(config)?.then((res)=>{
-      console.log(res)
+      temporaryStore.setTemporaryResponse(storeKey as string,{
+        headers:res.headers,
+        ok:res.ok,
+        data:JSON.stringify(res.data,null,2),
+        status: res.status
+      })
     })
     console.log(postData)
   }
   const historyStore = useHistory()
   const handleSave = ()=>{
-    historyStore.setPostData(storeKey as string,postData)
+    historyStore.setPostData(storeKey as string,JSON.parse(JSON.stringify(postData)))
   }
 
   const renderLabel = (option: SelectOption):VNodeChild=>{
-    return h(Method,{method:option.value as string})
+    return h(Method,{method:option.value as string,short:false})
   }
 </script>

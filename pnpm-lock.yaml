@@ -14,10 +14,12 @@ specifiers:
   autoprefixer: ^10.4.11
   codemirror: ^6.0.1
   daisyui: ^2.28.0
+  highlight.js: ^11.6.0
   naive-ui: ^2.33.3
   pinia: ^2.0.22
   postcss: ^8.4.16
   tailwindcss: ^3.1.8
+  tauri-plugin-store-api: github:tauri-apps/tauri-plugin-store#dev
   typescript: ^4.6.4
   uuid: ^9.0.0
   vite: ^3.0.2
@@ -32,8 +34,10 @@ dependencies:
   '@tauri-apps/api': 1.1.0
   '@vicons/ionicons5': 0.12.0
   codemirror: 6.0.1
+  highlight.js: registry.npmjs.org/highlight.js/11.6.0
   naive-ui: 2.33.3_vue@3.2.39
   pinia: 2.0.22_arz4dztosvwy2ghjrlh2wdhejm
+  tauri-plugin-store-api: github.com/tauri-apps/tauri-plugin-store/d8efb964bb1894bdf01407693ee896d0f9c557b3
   uuid: registry.npmjs.org/uuid/9.0.0
   vue: 3.2.39
 
@@ -696,11 +700,6 @@ packages:
       is-glob: 4.0.3
     dev: true
 
-  /highlight.js/11.6.0:
-    resolution: {integrity: sha512-ig1eqDzJaB0pqEvlPVIpSSyMaO92bH1N2rJpLMN/nX396wTpDA4Eq0uK+7I/2XG17pFaaKE0kjV/XPeGt7Evjw==}
-    engines: {node: '>=12.0.0'}
-    dev: false
-
   /is-arrayish/0.3.2:
     resolution: {integrity: sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==}
     dev: true
@@ -786,7 +785,7 @@ packages:
       date-fns: 2.29.3
       date-fns-tz: 1.3.7_date-fns@2.29.3
       evtd: 0.2.4
-      highlight.js: 11.6.0
+      highlight.js: registry.npmjs.org/highlight.js/11.6.0
       lodash: 4.17.21
       lodash-es: 4.17.21
       seemly: 0.3.6
@@ -1175,6 +1174,15 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
+  github.com/tauri-apps/tauri-plugin-store/d8efb964bb1894bdf01407693ee896d0f9c557b3:
+    resolution: {tarball: https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/d8efb964bb1894bdf01407693ee896d0f9c557b3}
+    name: tauri-plugin-store-api
+    version: 0.1.0
+    dependencies:
+      '@tauri-apps/api': registry.npmjs.org/@tauri-apps/api/1.1.0
+      tslib: registry.npmjs.org/tslib/2.4.0
+    dev: false
+
   mirrors.tencent.com/color/4.2.3:
     resolution: {integrity: sha512-1rXeuUUiGGrykh+CeBdu5Ie7OJwinCgQY0bc7GCRxy5xVHy+moaqkpL/jqQq0MtQOeYcrqEz4abc5f0KtU7W4A==, registry: https://mirrors.cloud.tencent.com/npm/, tarball: https://mirrors.tencent.com/npm/color/-/color-4.2.3.tgz}
     name: color
@@ -1251,6 +1259,13 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  registry.npmjs.org/@tauri-apps/api/1.1.0:
+    resolution: {integrity: sha512-n13pIqdPd3KtaMmmAcrU7BTfdMtIlGNnfZD0dNX8L4p8dgmuNyikm6JAA+yCpl9gqq6I8x5cV2Y0muqdgD0cWw==, registry: https://skimdb.npmjs.com/registry/, tarball: https://registry.npmjs.org/@tauri-apps/api/-/api-1.1.0.tgz}
+    name: '@tauri-apps/api'
+    version: 1.1.0
+    engines: {node: '>= 12.22.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
+    dev: false
 
   registry.npmjs.org/@tauri-apps/cli-darwin-arm64/1.1.1:
     resolution: {integrity: sha512-qBG11ig525/qf0f5OQxn0ON3hT8YdpTfpa4Y4kVqBJhdW50R5fadPv6tv5Dpl2TS2X7nWh/zg5mEXYoCK3HZ9w==, registry: https://skimdb.npmjs.com/registry/, tarball: https://registry.npmjs.org/@tauri-apps/cli-darwin-arm64/-/cli-darwin-arm64-1.1.1.tgz}
@@ -1602,6 +1617,19 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  registry.npmjs.org/highlight.js/11.6.0:
+    resolution: {integrity: sha512-ig1eqDzJaB0pqEvlPVIpSSyMaO92bH1N2rJpLMN/nX396wTpDA4Eq0uK+7I/2XG17pFaaKE0kjV/XPeGt7Evjw==, registry: https://skimdb.npmjs.com/registry/, tarball: https://registry.npmjs.org/highlight.js/-/highlight.js-11.6.0.tgz}
+    name: highlight.js
+    version: 11.6.0
+    engines: {node: '>=12.0.0'}
+    dev: false
+
+  registry.npmjs.org/tslib/2.4.0:
+    resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==, registry: https://skimdb.npmjs.com/registry/, tarball: https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz}
+    name: tslib
+    version: 2.4.0
+    dev: false
 
   registry.npmjs.org/uuid/9.0.0:
     resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==, registry: https://skimdb.npmjs.com/registry/, tarball: https://registry.npmjs.org/uuid/-/uuid-9.0.0.tgz}

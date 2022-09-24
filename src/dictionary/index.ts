@@ -2,42 +2,50 @@ export const methods = [
   {
     value:'GET',
     label:'GET',
-    class:'text-green-400'
+    color:'text-green-400',
+    short:'GET'
   },
   {
     value:'POST',
     label:'POST',
-    class:'text-orange-400'
+    color:'text-orange-400',
+    short:'POST'
   },
   {
     value:'PUT',
     label:'PUT',
-    class:'text-sky-400'
+    color:'text-sky-400',
+    short:'PUT'
   },
   {
     value:'DELETE',
     label:'DELETE',
-    class:'text-red-600'
+    color:'text-red-600',
+    short:'DEL'
   },
   {
     value:'OPTIONS',
     label:'OPTIONS',
-    class:'text-blue-600'
+    color:'text-blue-600',
+    short:'OPT'
   },
   {
     value:'HEAD',
     label:'HEAD',
-    class:'text-blue-600'
+    color:'text-blue-600',
+    short:'HEAD'
   },
   {
     value:'PATCH',
     label:'PATCH',
-    class:'text-fuchsia-600'
+    color:'text-fuchsia-600',
+    short:'PAT'
   },
   {
     value:'TRACE',
     label:'TRACE',
-    class:'text-indigo-600'
+    color:'text-indigo-600',
+    short:'TRA'
   },
 ]
 

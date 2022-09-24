@@ -43,3 +43,10 @@ export type RequestOptions = {
   form_data:TableDataType,
   bodyJson:string,
 }
+
+export type Response = {
+  headers: Record<string, string>,
+  data: string,
+  status: number,
+  ok: boolean,
+}

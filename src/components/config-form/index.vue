@@ -1,15 +1,24 @@
 <template>
   <div class="px-1">
     <Url></Url>
-    <n-h6 class="pt-4">请求参数</n-h6>
-    <Query></Query>
+    <n-collapse class="mt-10" :default-expanded-names="['请求参数','返回响应']">
+      <n-collapse-item title="请求参数" name="请求参数">
+        <div class="px-5">
+          <Query></Query>
+        </div>
+      </n-collapse-item>
+      <n-collapse-item title="返回响应" name="返回响应">
+        <Response></Response>
+      </n-collapse-item>
+    </n-collapse>
   </div>
 </template>
 <script setup lang="ts">
-  import {NH6} from "naive-ui"
+  import {NCollapse,NCollapseItem} from "naive-ui"
   import Url from "./url.vue"
   import Query from "./query/index.vue";
   import { provide } from "vue";
+  import Response from "../response/index.vue";
   const props = withDefaults(defineProps<{
     storeKey:string
   }>(),{})

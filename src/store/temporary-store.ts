@@ -1,10 +1,11 @@
-import { PostDataType } from "@/type";
+import { PostDataType,Response } from "@/type";
 import { defineStore } from "pinia";
 import { v4 as uuidv4 } from 'uuid';
 import { ref } from "vue";
 
 export const useTemporary = defineStore('temporary',()=>{
   const temporaryPostData = ref<Map<string,PostDataType>>(new Map())
+  const temporaryResponse = ref<Map<string,Response>>(new Map())
   const openNewPostData = ()=>{
     const key = uuidv4()
     temporaryPostData.value.set(key,{
@@ -27,11 +28,22 @@ export const useTemporary = defineStore('temporary',()=>{
     })
     return key
   }
-  const openHistoryPostData = (postData:PostDataType,key:string)=>{
+  const openHistoryPostData = (key:string,postData:PostDataType,)=>{
     temporaryPostData.value.set(key,postData)
   }
   const removePostData =(key:string)=>{
     temporaryPostData.value.delete(key)
+    temporaryResponse.value.delete(key)
   }
-  return {openNewPostData,openHistoryPostData,temporaryPostData,removePostData}
+  const setTemporaryResponse = (key:string,response:Response)=>{
+    temporaryResponse.value.set(key,response)
+  }
+  return {
+    openNewPostData,
+    openHistoryPostData,
+    temporaryPostData,
+    removePostData,
+    temporaryResponse,
+    setTemporaryResponse
+  }
 })
