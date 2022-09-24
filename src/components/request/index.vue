@@ -9,11 +9,11 @@
   </n-tabs>
 </template>
 <script setup lang="ts">
-  import { NTabs,NTabPane,NIcon,NButton } from 'naive-ui';
-  import ApiContent from '../api-content/index.vue'
+  import { NTabs,NTabPane } from 'naive-ui';
+  import ApiContent from '@/components/config-form/index.vue'
   import { useTemporary } from '@/store/temporary-store';
   import { computed, ref } from 'vue';
-  import Method from '../custom-components/method.vue';
+  import Method from '@/components/custom-components/method.vue';
   
   const temporaryStore = useTemporary()
   const tabs = computed(()=>{

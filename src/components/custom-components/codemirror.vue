@@ -14,7 +14,7 @@
 <script setup lang="ts">
   import { computed, Ref, ref } from 'vue';
   import { NEllipsis,NButton } from 'naive-ui';
-  import { useCodeMirror } from '../../hook/useCodeMirror';
+  import { useCodeMirror } from '@/hook/useCodeMirror';
 
   const emit = defineEmits<{
     (e:'update:code',code:string):void
