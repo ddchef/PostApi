@@ -8,11 +8,16 @@
   },
   "package": {
     "productName": "PostApi",
-    "version": "0.0.0"
+    "version": "0.0.1"
   },
   "tauri": {
     "allowlist": {
-      "all": true
+      "all": true,
+      "http": {
+        "all": true,
+        "request": true,
+        "scope": ["http://**","https://**"]
+      }
     },
     "bundle": {
       "active": true,

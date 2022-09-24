@@ -30,3 +30,16 @@ export type PostDataType = {
   basicUsername:string,
   basicPassword:string
 }
+
+export type ResponseType = 'Binary'|'JSON'|'Text'
+export type RequestOptions = {
+  url:string,
+  method:MethodType,
+  headers?: Record<string, any>;
+  query?: Record<string, any>;
+  responseType?:ResponseType,
+  // 两种body
+  bodyType:BodyType,
+  form_data:TableDataType,
+  bodyJson:string,
+}

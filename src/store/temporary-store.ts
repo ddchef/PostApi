@@ -30,6 +30,8 @@ export const useTemporary = defineStore('temporary',()=>{
   const openHistoryPostData = (postData:PostDataType,key:string)=>{
     temporaryPostData.value.set(key,postData)
   }
-
-  return {openNewPostData,openHistoryPostData,temporaryPostData}
+  const removePostData =(key:string)=>{
+    temporaryPostData.value.delete(key)
+  }
+  return {openNewPostData,openHistoryPostData,temporaryPostData,removePostData}
 })
