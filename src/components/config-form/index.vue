@@ -3,7 +3,7 @@
     <Url></Url>
     <n-collapse class="mt-10" :default-expanded-names="['请求参数','返回响应']">
       <n-collapse-item title="请求参数" name="请求参数">
-        <div class="px-5">
+        <div class="px-5 min-h-[300px]">
           <Query></Query>
         </div>
       </n-collapse-item>

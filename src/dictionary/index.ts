@@ -72,3 +72,8 @@ export const APIKeyOption = [{
   value:'Query-Params',
   label:'Query Params'
 }]
+
+export const contentTypeToCodeType=new Map([
+  ['text/html','xml'],
+  ['application/json','json']
+])

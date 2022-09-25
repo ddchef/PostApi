@@ -1,4 +1,4 @@
-import { PostDataType,Response } from "@/type";
+import { PostDataType,Response, ResponseType } from "@/type";
 import { defineStore } from "pinia";
 import { v4 as uuidv4 } from 'uuid';
 import { ref } from "vue";
@@ -24,7 +24,8 @@ export const useTemporary = defineStore('temporary',()=>{
       apiValue:'',
       bearerToken:'',
       basicUsername:'',
-      basicPassword:''
+      basicPassword:'',
+      responseType:'JSON'
     })
     return key
   }

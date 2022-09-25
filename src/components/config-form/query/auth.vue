@@ -1,5 +1,5 @@
 <template>
-  <div class="w-8/12 mt-5">
+  <div class="w-8/12 pt-5">
     <Row label="类型"><n-select :options="authOption" v-model:value="authType"></n-select></Row>
     <div class="mt-8">
       <div v-if="authType === 'API-Key'">

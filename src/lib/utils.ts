@@ -1,4 +1,4 @@
-import { PostDataType, RequestOptions, TableDataType } from "@/type";
+import { PostDataType, RequestOptions, ResponseType, TableDataType } from "@/type";
 import { Body } from "@tauri-apps/api/http";
 
 function tableDataToJson(data:TableDataType):Record<string,string>{
@@ -6,6 +6,13 @@ function tableDataToJson(data:TableDataType):Record<string,string>{
     pre[cur.key] = cur.value
     return pre
   },{})
+}
+
+function hostFromUrl(url:string):string{
+  const result = url.match(/https?:\/\/(.*?)(\/.*)?$/)
+  if(!result) return ''
+  const [_,host] = result
+  return host
 }
 
 export function createNativeBody(config:RequestOptions):Body|undefined{
@@ -24,7 +31,12 @@ export function createNativeBody(config:RequestOptions):Body|undefined{
 }
 
 function createHeaders(postData:PostDataType):Record<string,any>{
-  let headers = {...tableDataToJson(postData.header),...tableDataToJson(postData.cookie)}
+  let host = hostFromUrl(postData.url)
+  let headers = {
+    ...tableDataToJson(postData.header),
+    ...tableDataToJson(postData.cookie),
+    host
+  }
   if(postData.authType === 'Bearer-Token'){
     return {...headers,token:postData.bearerToken}
   }
@@ -62,6 +74,7 @@ export function postDataToConfig(postData:PostDataType):RequestOptions{
     query:createParams(postData),
     bodyType:postData.bodyType,
     bodyJson:postData.bodyJson,
-    form_data:postData.form_data
+    form_data:postData.form_data,
+    responseType:postData.responseType||'JSON'
   }
 }

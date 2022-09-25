@@ -10,7 +10,11 @@
     </n-gi>
     <n-gi :span="4">
       <n-space align="center" justify="center">
-        <n-button strong secondary type="info" @click="handleRun">运行</n-button>
+        <n-spin size="small" :show="loading">
+          <n-button strong secondary type="info" @click="handleRun">
+            运行
+          </n-button>
+        </n-spin>
         <n-button type="success" @click="handleSave">保存</n-button>
       </n-space>
     </n-gi>
@@ -18,16 +22,17 @@
 </template>
 <script setup lang="ts">
   import { useTemporary } from "@/store/temporary-store";
-  import {NInputGroup,NSelect,NInput,NGi,NGrid,NButton,NSpace, SelectOption} from "naive-ui"
+  import {NInputGroup,NSelect,NInput,NGi,NGrid,NButton,NSpace, SelectOption,NSpin} from "naive-ui"
   import { storeToRefs } from "pinia";
-  import { computed, inject, h, VNodeChild, watchEffect } from "vue";
+  import { computed, inject, h, VNodeChild, watchEffect, ref } from "vue";
   import {methods} from '../../dictionary/index'
-  import {PostDataType} from "@/type";
+  import {PostDataType, Response} from "@/type";
   import { useHistory } from "@/store/history-store";
   import Method from "../custom-components/method.vue";
   import { postDataToConfig } from "@/lib/utils";
   import { request } from "@/lib/request";
-  const storeKey = inject<string>('store_key')
+import { ResponseType } from "@tauri-apps/api/http";
+  const storeKey = inject<string>('store_key','')
   const temporaryStore = useTemporary()
   const {temporaryPostData} = storeToRefs(temporaryStore)
   const postData = temporaryPostData.value.get(storeKey as string) as PostDataType
@@ -40,22 +45,28 @@
     get:()=>postData?.url||'',
     set:(v)=>postData.url=v
   })
+  const loading = ref(false)
   const handleRun = ()=>{
+    loading.value = true
+    temporaryStore.setTemporaryResponse(storeKey,{} as Response)
     const config = postDataToConfig(postData)
     const startTime = Date.now()
     request(config)?.then((res)=>{
       const endTime = Date.now()
-      console.log((res.data as Record<string,string>).length)
-      temporaryStore.setTemporaryResponse(storeKey as string,{
+      console.log(res)
+      temporaryStore.setTemporaryResponse(storeKey,{
         headers:res.headers,
         ok:res.ok,
-        data:JSON.stringify(res.data,null,2),
+        data:config.responseType==ResponseType.JSON?JSON.stringify(res.data,null,2):res.data as string,
         status: res.status,
         time:endTime-startTime,
         size:''
       })
+      loading.value = false
+    }).catch((err)=>{
+      console.log(err)
+      loading.value = false
     })
-    console.log(postData)
   }
   const historyStore = useHistory()
   const handleSave = ()=>{

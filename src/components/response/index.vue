@@ -18,7 +18,7 @@
     <n-tabs default-value="Body"  type="line" animated>
       <n-tab-pane name="Body">
         <div class="max-h-96 border border-inherit overflow-auto">
-          <n-code show-line-numbers :code="response?.data" language="json"></n-code>
+          <n-code show-line-numbers :code="response?.data" :language="'json'"></n-code>
         </div>
       </n-tab-pane>
       <n-tab-pane name="Header">
@@ -26,13 +26,13 @@
           <n-table :single-line="false" striped>
             <thead>
               <tr>
-                <th>名称</th>
+                <th class="w-[200px]">名称</th>
                 <th>值</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(value,key) in response?.headers">
-                <td>{{key}}</td>
+                <td class="w-[200px]">{{key}}</td>
                 <td>{{value}}</td>
               </tr>
             </tbody>
@@ -43,6 +43,7 @@
   </div>
 </template>
 <script setup lang="ts">
+  // import { contentTypeToCodeType } from '@/dictionary';
   import { useTemporary } from '@/store/temporary-store';
   import { NTabs,NTabPane,NCode,NTable,NSpace } from 'naive-ui';
   import { storeToRefs } from 'pinia';
@@ -53,5 +54,7 @@
   const response = computed(()=>{
     return temporaryResponse.value.get(storeKey as string)
   })
-  console.log(response)
+  // const codeType = computed(()=>{
+  //   return contentTypeToCodeType.get(response.value?.headers['content-type'] as string)
+  // })
 </script>

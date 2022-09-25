@@ -15,6 +15,9 @@
     <n-tab-pane name="Auth">
       <Auth></Auth>
     </n-tab-pane>
+    <n-tab-pane name="响应数据类型">
+      <ResponseType></ResponseType>
+    </n-tab-pane>
   </n-tabs>
 </template>
 <script setup lang="ts">
@@ -24,4 +27,5 @@
   import Header from './header.vue';
   import Cookie from './cookie.vue';
   import Auth from './auth.vue';
+  import ResponseType from './response-type.vue';
 </script>

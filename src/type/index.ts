@@ -28,7 +28,8 @@ export type PostDataType = {
   apiValue:string,
   bearerToken:string,
   basicUsername:string,
-  basicPassword:string
+  basicPassword:string,
+  responseType?:ResponseType,
 }
 
 export type ResponseType = 'Binary'|'JSON'|'Text'
