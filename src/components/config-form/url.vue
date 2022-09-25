@@ -42,12 +42,17 @@
   })
   const handleRun = ()=>{
     const config = postDataToConfig(postData)
+    const startTime = Date.now()
     request(config)?.then((res)=>{
+      const endTime = Date.now()
+      console.log((res.data as Record<string,string>).length)
       temporaryStore.setTemporaryResponse(storeKey as string,{
         headers:res.headers,
         ok:res.ok,
         data:JSON.stringify(res.data,null,2),
-        status: res.status
+        status: res.status,
+        time:endTime-startTime,
+        size:''
       })
     })
     console.log(postData)

@@ -49,4 +49,6 @@ export type Response = {
   data: string,
   status: number,
   ok: boolean,
+  time:number,
+  size:string
 }

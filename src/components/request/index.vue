@@ -1,5 +1,5 @@
 <template>
-  <n-tabs type="card" closable size="small" v-model:value="active" addable @add="handleNewTab" @close="handleRemoveRab">
+  <n-tabs animated type="card" closable size="small" v-model:value="active" addable @add="handleNewTab" @close="handleRemoveRab">
     <n-tab-pane v-for="tab in tabs" :tab="tab?.name||'新建接口'" :name="tab.key">
       <template #tab>
         <Method :method="tab.method">{{tab?.name||'新建接口'}}</Method>
