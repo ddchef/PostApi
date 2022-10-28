@@ -8,5 +8,5 @@
   </n-card>
 </template>
 <script setup lang="ts">
-  import {NEmpty,NCard} from "naive-ui"
+import { NEmpty, NCard } from "naive-ui"
 </script>

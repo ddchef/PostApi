@@ -1,8 +1,10 @@
-import { RequestOptions } from "@/type";
+import nativeFetch from "./native";
+import type { Options, Method, Response } from "tauri-plugin-reqwest";
+export interface RequestOptions extends Options {
+  url: string,
+  method: Method
+}
 
-import {GET, POST} from "./native";
-
-export function request(config:RequestOptions){
-  if(config.method === 'GET') return GET(config)
-  if(config.method === 'POST') return POST(config)
+export function request(config: RequestOptions): Promise<Response> {
+  return nativeFetch(config)
 }

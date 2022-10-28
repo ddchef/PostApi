@@ -21,6 +21,9 @@ tauri = { version = "1.1", features = ["api-all"] }
 [dependencies.tauri-plugin-store]
 git = "https://github.com/tauri-apps/tauri-plugin-store"
 #branch = "main"
+[dependencies.tauri-plugin-reqwest]
+git = "https://github.com/ddchef/tauri-plugin-reqwest"
+branch = "main"
 
 [features]
 # by default Tauri runs in production mode

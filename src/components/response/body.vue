@@ -6,8 +6,8 @@
   </n-tabs>
 </template>
 <script setup lang="ts">
-  import { NTabs,NTabPane,NCode } from 'naive-ui';
-  const props = withDefaults(defineProps<{
-    data:string
-  }>(),{data:''})
+import { NTabs, NTabPane, NCode } from 'naive-ui';
+const props = withDefaults(defineProps<{
+  data: string
+}>(), { data: '' })
 </script>

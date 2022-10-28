@@ -1,80 +1,28 @@
-import { PostDataType, RequestOptions, ResponseType, TableDataType } from "@/type";
-import { Body } from "@tauri-apps/api/http";
+import { PostDataType, TableDataType } from "@/type";
+import { RequestOptions } from "@/lib/request";
 
-function tableDataToJson(data:TableDataType):Record<string,string>{
-  return data.reduce((pre,cur)=>{
-    pre[cur.key] = cur.value
-    return pre
-  },{})
+function tableDataToData(data: TableDataType): [string, string][] {
+  return data.map(item => [item.key, item.value])
 }
 
-function hostFromUrl(url:string):string{
-  const result = url.match(/https?:\/\/(.*?)(\/.*)?$/)
-  if(!result) return ''
-  const [_,host] = result
-  return host
-}
-
-export function createNativeBody(config:RequestOptions):Body|undefined{
-  if(config.bodyType === 'none') return undefined
-  if(config.bodyType === 'form-data'&&config.form_data) {
-    return Body.form(tableDataToJson(config.form_data))
+export function postDataToConfig(postData: PostDataType): RequestOptions {
+  let baseOptions: { [key: string]: any } = {
+    method: postData.method,
+    url: postData.url
   }
-  if(config.bodyType === 'json'&&config.bodyJson){
-    try {
-      return Body.json(JSON.parse(config.bodyJson))
-    } catch (error) {
-      throw(new Error("Body Json格式转换失败！"))
-    }
+  if (postData.authType === 'Bearer-Token') {
+    baseOptions['bearer_auth'] = postData.bearerToken
   }
-  return undefined
-}
-
-function createHeaders(postData:PostDataType):Record<string,any>{
-  let host = hostFromUrl(postData.url)
-  let headers = {
-    ...tableDataToJson(postData.header),
-    ...tableDataToJson(postData.cookie),
-    host
+  if (postData.authType === 'Basic-Auth') {
+    baseOptions['basic_auth'] = [postData.basicUsername, postData.basicPassword]
   }
-  if(postData.authType === 'Bearer-Token'){
-    return {...headers,token:postData.bearerToken}
+  if (postData.header) baseOptions['headers'] = tableDataToData(postData.header)
+  if (postData.query) baseOptions['query'] = tableDataToData(postData.query)
+  if (postData.content_type === 'application/json') {
+    baseOptions['json'] = postData.bodyJson
   }
-  if(postData.authType === 'API-Key'&&postData.apiKeyType === 'Header'){
-    return {
-      ...headers,
-      [postData.apiKey]:postData.apiValue
-    }
+  if (postData.content_type === 'application/x-www-form-urlencoded' || postData.content_type === 'multipart/form-data') {
+    baseOptions['form'] = tableDataToData(postData.form_data)
   }
-  if(postData.authType === 'Basic-Auth'){
-    return {
-      ...headers,
-      username:postData.basicUsername,
-      password:postData.basicPassword
-    }
-  }
-  return headers
-}
-
-function createParams(postData:PostDataType):Record<string,any>{
-  if(postData.authType === 'API-Key' && postData.apiKeyType === 'Query-Params'){
-    return {
-      ...tableDataToJson(postData.params),
-      [postData.apiKey]:postData.apiValue
-    }
-  }
-  return tableDataToJson(postData.params)
-}
-
-export function postDataToConfig(postData:PostDataType):RequestOptions{
-  return {
-    method:postData.method,
-    url:postData.url,
-    headers:createHeaders(postData),
-    query:createParams(postData),
-    bodyType:postData.bodyType,
-    bodyJson:postData.bodyJson,
-    form_data:postData.form_data,
-    responseType:postData.responseType||'JSON'
-  }
+  return baseOptions as RequestOptions
 }

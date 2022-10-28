@@ -4,12 +4,12 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import EditTable from '../../custom-components/edit-table.vue';
-import {columns} from '../../../dictionary/index';
+import { columns } from '../../../dictionary/index';
 import { useGetPostData } from '@/hook/temporaryPostData';
 const postData = useGetPostData()
 
 const query_data = computed({
-  get:()=>postData.params,
-  set:(v)=>postData.params = v
+  get: () => postData.query,
+  set: (v) => postData.query = v
 })
 </script>

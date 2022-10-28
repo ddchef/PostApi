@@ -8,28 +8,30 @@
     </div>
   </div>
   <n-ellipsis expand-trigger="click" line-clamp="2" :tooltip="false" class="text-xs text-red-600">
-    <template v-for="(err,i) in error||[]">{{err.message}}<br></template>
+    <template v-for="(err, i) in error || []">{{ err.message }}<br></template>
   </n-ellipsis>
 </template>
 <script setup lang="ts">
-  import { computed, Ref, ref } from 'vue';
-  import { NEllipsis,NButton } from 'naive-ui';
-  import { useCodeMirror } from '@/hook/useCodeMirror';
+import { computed, Ref, ref } from 'vue';
+import { NEllipsis, NButton } from 'naive-ui';
+import { useCodeMirror } from '@/hook/useCodeMirror';
 
-  const emit = defineEmits<{
-    (e:'update:code',code:string):void
-  }>()
-  const props = withDefaults(defineProps<{
-    code:string
-  }>(),{code:''})
-  const editor = ref<Element>()
-    
-  const code = computed({
-    get:()=>props.code,
-    set:(v)=>emit('update:code',v)
-  })
-  const {error,formatHook} = useCodeMirror(code,editor as unknown as Ref<Element>)
+const emit = defineEmits<{
+  (e: 'update:code', code: string): void
+}>()
+const props = withDefaults(defineProps<{
+  code: string
+}>(), { code: '' })
+const editor = ref<Element>()
+
+const code = computed({
+  get: () => props.code,
+  set: (v) => emit('update:code', v)
+})
+const { error, formatHook } = useCodeMirror(code, editor as unknown as Ref<Element>)
 </script>
 <style>
-  .cm-editor { height: 100% }
+.cm-editor {
+  height: 100%
+}
 </style>
