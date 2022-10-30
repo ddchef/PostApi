@@ -7,6 +7,7 @@ export const useHistory = defineStore('history', () => {
   const historyData = new Store('.history.dat')
   const historyPostData = ref<Map<string, PostDataType>>(new Map())
   const setPostData = (key: string, postData: PostDataType) => {
+    console.log('setPostData',historyData)
     historyPostData.value.set(key, postData)
     historyData.set(key, postData)
   }
@@ -21,5 +22,5 @@ export const useHistory = defineStore('history', () => {
     historyPostData.value.delete(key)
     historyData.delete(key)
   }
-  return { setPostData, getPostData, historyPostData, intiHistoryData, removePostData }
+  return { getPostData, historyPostData, intiHistoryData, removePostData,setPostData }
 })

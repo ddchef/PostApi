@@ -16,7 +16,7 @@ export const useTemporary = defineStore('temporary', () => {
       url: '',
       params: [],
       query: [],
-      content_type: 'text/plain',
+      content_type: 'none',
       form_data: [],
       bodyJson: '',
       cookie: [],

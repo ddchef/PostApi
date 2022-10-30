@@ -34,7 +34,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "me.xjie.PostApi",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -60,12 +60,11 @@
     },
     "windows": [
       {
+        "transparent": true,
         "fullscreen": false,
-        "height": 600,
-        "resizable": true,
-        "title": "PostApi",
-        "width": 800,
-        "decorations": true
+        "width": 1200,
+        "height": 728,
+        "resizable": true
       }
     ]
   }

@@ -21,7 +21,7 @@ specifiers:
   postcss: ^8.4.16
   qs: ^6.11.0
   tailwindcss: ^3.1.8
-  tauri-plugin-reqwest: ^0.0.3
+  tauri-plugin-reqwest: ^0.0.4
   tauri-plugin-store-api: github:tauri-apps/tauri-plugin-store#dev
   typescript: ^4.6.4
   uuid: ^9.0.0
@@ -41,7 +41,7 @@ dependencies:
   naive-ui: 2.33.3_vue@3.2.39
   pinia: 2.0.22_arz4dztosvwy2ghjrlh2wdhejm
   qs: 6.11.0
-  tauri-plugin-reqwest: 0.0.3
+  tauri-plugin-reqwest: 0.0.4
   tauri-plugin-store-api: github.com/tauri-apps/tauri-plugin-store/9bd993aa67766596638bbfd91e79a1bf8f632014
   uuid: 9.0.0
   vue: 3.2.39
@@ -1393,8 +1393,8 @@ packages:
       - ts-node
     dev: true
 
-  /tauri-plugin-reqwest/0.0.3:
-    resolution: {integrity: sha512-+jFqc1gXAMtdz5x9DExzpGdlDV0EKZpXKo1mpcgRfgcyWc217s/fJcT3+yjyWCM0A6VoLSYQmssyN7lDv4S5Pw==}
+  /tauri-plugin-reqwest/0.0.4:
+    resolution: {integrity: sha512-76pi0xqCn9Xe3oL/oL6gJzC5VJrpd4/8k8NZk8WEfckPBTeK2FxI7Z5w5DQzaHiZrSJsc5M8JYN8qY+1xL17hg==}
     dependencies:
       '@tauri-apps/api': 1.1.0
       tslib: 2.4.0

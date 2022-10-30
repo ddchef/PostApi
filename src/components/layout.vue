@@ -1,7 +1,7 @@
 <template>
   <n-layout has-sider class="h-full">
-    <n-layout-sider class="h-full" collapse-mode="width" :collapsed-width="0" :width="240" show-trigger="arrow-circle"
-      collapsed-trigger-style="right: -20px;" bordered>
+    <n-layout-sider default-collapsed class="h-full" collapse-mode="width" :collapsed-width="0" :width="240"
+      show-trigger="arrow-circle" collapsed-trigger-style="right: -20px;" bordered>
       <History></History>
     </n-layout-sider>
     <n-layout-content class="h-full px-1">

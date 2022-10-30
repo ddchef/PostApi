@@ -3090,8 +3090,7 @@ dependencies = [
 
 [[package]]
 name = "tauri-plugin-reqwest"
-version = "0.0.3"
-source = "git+https://github.com/ddchef/tauri-plugin-reqwest?branch=main#a078e49559eaed8e3b54b1fd81237c952fdb7085"
+version = "0.0.4"
 dependencies = [
  "chrono",
  "regex",

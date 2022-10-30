@@ -1,5 +1,5 @@
 <template>
-  <div class="px-1">
+  <div class="px-1 bg-white">
     <Url></Url>
     <NScrollbar style="height: calc(100vh - 77px);">
       <n-collapse class="py-10" :default-expanded-names="['请求参数', '返回响应']">

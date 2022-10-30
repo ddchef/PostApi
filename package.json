@@ -21,7 +21,7 @@
     "naive-ui": "^2.33.3",
     "pinia": "^2.0.22",
     "qs": "^6.11.0",
-    "tauri-plugin-reqwest": "^0.0.3",
+    "tauri-plugin-reqwest": "^0.0.4",
     "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store#dev",
     "uuid": "^9.0.0",
     "vue": "^3.2.37"

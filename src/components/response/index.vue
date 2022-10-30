@@ -22,16 +22,16 @@
     <n-tabs default-value="Body" type="line" animated>
       <n-tab-pane name="Body">
         <div class="max-h-96 border border-inherit overflow-auto">
-          <n-code v-if="response.content_type === 'application/json'" show-line-numbers
+          <n-code v-if="response.content_type.includes('application/json')" show-line-numbers
             :code="jsonFormat(response?.body)" :language="'json'"></n-code>
-          <n-code v-if="response.content_type === 'text/html'" show-line-numbers :code="response?.body"
+          <n-code v-if="response.content_type.includes('text/html')" show-line-numbers :code="response?.body"
             :language="'xml'"></n-code>
-          <n-code v-if="response.content_type === 'text/plain'" show-line-numbers :code="response?.body"></n-code>
+          <n-code v-if="response.content_type.includes('text/plain')" show-line-numbers :code="response?.body"></n-code>
         </div>
       </n-tab-pane>
       <n-tab-pane name="Header">
-        <div class="w-2/4 max-h-96 overflow-auto">
-          <n-table :single-line="false" striped>
+        <div class="w-3/4 max-h-96 overflow-auto">
+          <n-table :single-line="false" striped style="table-layout:fixed;">
             <thead>
               <tr>
                 <th class="w-[200px]">名称</th>
@@ -60,7 +60,9 @@ import { inject } from 'vue';
 const storeKey = inject<string>('store_key')
 const { temporaryResponse } = storeToRefs(useTemporary())
 const response = computed(() => {
-  return temporaryResponse.value.get(storeKey as string)
+  let res = temporaryResponse.value.get(storeKey as string);
+  console.log(res)
+  return res
 })
 const jsonFormat = (str: string) => {
   return JSON.stringify(JSON.parse(str), null, 2);

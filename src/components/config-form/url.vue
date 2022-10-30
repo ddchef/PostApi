@@ -15,7 +15,7 @@
             运行
           </n-button>
         </n-spin>
-        <n-button type="success" @click="handleSave">保存</n-button>
+        <n-button :disabled="!canSave" type="success" @click="handleSave">保存</n-button>
       </n-space>
     </n-gi>
   </n-grid>
@@ -48,12 +48,16 @@ const pass = computed(() => {
   return /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i.test(url.value)
 })
 
+const canSave = computed(() => {
+  return url.value.length > 0
+})
+
 const loading = ref(false)
 const handleRun = () => {
   loading.value = true
-  temporaryStore.setTemporaryResponse(storeKey, {} as Response)
+  // temporaryStore.setTemporaryResponse(storeKey, {} as Response)
   const config = postDataToConfig(postData)
-  request(config)?.then((res) => {
+  request(config).then((res) => {
     temporaryStore.setTemporaryResponse(storeKey, res)
     loading.value = false
   }).catch((err) => {
@@ -70,7 +74,6 @@ const handleFormate = () => {
   if (!pass.value) return
   const [uri, queryStr] = url.value.split("?");
   postData.url = uri
-  console.log(queryStr);
   if (!queryStr) return;
   const query = Object.entries(qs.parse(queryStr)).map(item => ({
     key: item[0],
